@@ -1,0 +1,52 @@
+.btn-edit {
+  background-color: #63199b;
+  color: white;
+
+  float: right;
+  margin: 2px;
+
+  padding: 14px 24px;
+  border: 0 none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-color: #63199b;
+}
+.btn {
+  background-color: #63199b;
+  color: white;
+  padding: 14px 24px;
+  border: 0 none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-color: #63199b;
+}
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+  outline: 0 none;
+}
+.btm-delete {
+  background-color: black;
+}
+.btn-primary {
+  background-color: #63199b;
+  border-color: #63199b;
+}
+.btn-secondary {
+  background-color: #63199b;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  background: #0099cc;
+}
+
+.btn-primary:active,
+.btn-primary.active {
+  background: #63199b;
+  box-shadow: none;
+}
