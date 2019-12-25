@@ -10,7 +10,6 @@ var authRouter = require("./routes/auth");
 var path = require("path");
 require("dotenv").config();
 var app = express();
-
 //cors
 app.use(cors());
 //making uploads folder public
