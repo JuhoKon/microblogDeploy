@@ -38,7 +38,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/posts", postsRouter); //forward request to router
 app.use("/users", usersRouter);
 app.use("/auth", authRouter);
-app.get("/", function(req, res) {
+app.get("/doc", function(req, res) {
   res.sendFile(path.join(__dirname + "/apidoc/index.html"));
 });
 // catch 404 and forward to error handler
