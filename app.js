@@ -65,5 +65,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
+const port = process.env.PORT || 8080;
 
-module.exports = app;
+app.listen(port, () => console.log(`Server started on port ${port}`));
