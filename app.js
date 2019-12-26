@@ -15,6 +15,7 @@ app.use(cors());
 //making uploads folder public
 app.use("/uploads", express.static("uploads"));
 app.use("/apidoc", express.static("apidoc"));
+app.use(express.static("client/build"));
 // Reading env variables (config example from https://github.com/sclorg/nodejs-ex/blob/master/server.js)
 var mongoURL = process.env.MONGO_URL;
 
@@ -41,6 +42,11 @@ app.use("/auth", authRouter);
 app.get("/doc", function(req, res) {
   res.sendFile(path.join(__dirname + "/apidoc/index.html"));
 });
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  console.log("Hey");
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -57,14 +63,7 @@ app.use(function(err, req, res, next) {
     msg: err.message
   });
 });
-if (process.env.NODE_ENV === "production") {
-  // Set static folder
-  app.use(express.static("client/build"));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
