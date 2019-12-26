@@ -36,10 +36,10 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/posts", postsRouter); //forward request to router
-app.use("/users", usersRouter);
-app.use("/auth", authRouter);
-app.get("/doc", function(req, res) {
+app.use("/api/posts", postsRouter); //forward request to router
+app.use("/api/users", usersRouter);
+app.use("/api/auth", authRouter);
+app.get("/api", function(req, res) {
   res.sendFile(path.join(__dirname + "/apidoc/index.html"));
 });
 
