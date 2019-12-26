@@ -1,5 +1,5 @@
 var Post = require("../models/post.model");
-var User = require("../models/user.model");
+//var User = require("../models/user.model");
 var redis = require("redis"); //Cache
 require("dotenv").config();
 

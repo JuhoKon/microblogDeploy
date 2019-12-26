@@ -43,7 +43,7 @@ app.get("/api/doc", function(req, res) {
   res.sendFile(path.join(__dirname + "/apidoc/index.html"));
 });
 
-app.get("/*", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   console.log("Hey");
 });
