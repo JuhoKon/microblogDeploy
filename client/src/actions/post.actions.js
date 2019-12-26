@@ -15,7 +15,7 @@ import { returnErrors } from "./error.actions";
 export const getItems = () => dispatch => {
   dispatch(setItemsLoading());
   axios
-    .get("/posts")
+    .get("/api/posts")
     .then(res =>
       dispatch({
         type: GET_ITEMS,
@@ -32,7 +32,7 @@ export const getItems = () => dispatch => {
 export const getFollowed = followedIds => dispatch => {
   dispatch(setItemsLoading());
   axios
-    .post("/posts/followedPosts", followedIds)
+    .post("/api/posts/followedPosts", followedIds)
     .then(res =>
       dispatch({
         type: GET_ITEMS,
@@ -67,7 +67,7 @@ export const getFollowed = followedIds => dispatch => {
 //create a post
 export const addItem = item => (dispatch, getState) => {
   axios
-    .post("/posts/create", item, tokenConfig(getState))
+    .post("/api/posts/create", item, tokenConfig(getState))
     .then(res =>
       dispatch({
         type: ADD_ITEM,
@@ -92,7 +92,7 @@ export const getItemsByUserID = (owner, id) => dispatch => {
   const body = JSON.stringify({ owner, id }); //TODO: remove id and make it owrk without
   //console.log(body);
   axios
-    .post("/posts/postsByID", body, config)
+    .post("/api/posts/postsByID", body, config)
     .then(res =>
       dispatch({
         type: GET_ITEM,
@@ -124,7 +124,7 @@ export const updateItem = (item, id) => (dispatch, getState) => {
   const body = JSON.stringify({ title, text, id, owner, username });
 
   axios
-    .put(`/posts/update/${id}`, body, tokenConfig(getState), config)
+    .put(`/api/posts/update/${id}`, body, tokenConfig(getState), config)
     .then(res =>
       dispatch({
         type: UPDATE_ITEM,
@@ -149,7 +149,7 @@ export const getItemsByUsername = (owner, id) => (dispatch, getState) => {
   const body = JSON.stringify({ owner, id });
   //console.log(body);
   axios
-    .post("/posts/postsByUsername", body, config)
+    .post("/api/posts/postsByUsername", body, config)
     .then(res =>
       dispatch({
         type: GET_ITEM,
@@ -170,7 +170,7 @@ export const getItemsByUsername = (owner, id) => (dispatch, getState) => {
 export const deleteItem = id => (dispatch, getState) => {
   axios
     //.delete(`/api/items/${id}`, tokenConfig(getState))
-    .delete(`/posts/${id}`, tokenConfig(getState))
+    .delete(`/api/posts/${id}`, tokenConfig(getState))
     .then(res =>
       dispatch({
         type: DELETE_ITEM,

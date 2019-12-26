@@ -21,7 +21,7 @@ export const loadUser = () => (dispatch, getState) => {
   //Load user
   dispatch({ type: USER_LOADING });
   axios
-    .get("/auth/user", tokenConfig(getState))
+    .get("/api/auth/user", tokenConfig(getState))
     .then(res =>
       dispatch({
         type: USER_LOADED,
@@ -46,7 +46,7 @@ export const register = ({ name, email, password, age }) => dispatch => {
   const body = JSON.stringify({ name, email, password, age });
 
   axios
-    .post("/users/create", body, config)
+    .post("/api/users/create", body, config)
     .then(res =>
       dispatch({
         type: REGISTER_SUCCESS, //to reducer
@@ -73,7 +73,7 @@ export const login = ({ email, password }) => dispatch => {
   const body = JSON.stringify({ email, password });
 
   axios
-    .post("/auth", body, config)
+    .post("/api/auth", body, config)
     .then(res =>
       dispatch({
         type: LOGIN_SUCCESS,
@@ -100,7 +100,7 @@ export const getUser = id => (dispatch, getState) => {
   console.log(config);
   config.headers["id"] = id;
   axios
-    .get("/users/getUserInfo", config)
+    .get("/api/users/getUserInfo", config)
     .then(res =>
       dispatch({
         type: GET_USER,
@@ -119,7 +119,7 @@ export const follow = (ownId, followId) => (dispatch, getState) => {
 
   const config = tokenConfig(getState);
   axios
-    .put("/users/update", body, config)
+    .put("/api/users/update", body, config)
     .then(res =>
       dispatch({
         type: ADD_FOLLOW_SUCCESS, //to reducer
@@ -141,7 +141,7 @@ export const unfollow = (ownId, followId) => (dispatch, getState) => {
   config.headers["followId"] = followId;
 
   axios
-    .delete("/users/unfollow", config)
+    .delete("/api/users/unfollow", config)
     .then(res =>
       dispatch({
         type: UN_FOLLOW_SUCCESS, //to reducer
