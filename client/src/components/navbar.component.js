@@ -7,9 +7,24 @@ import LoginModal from "./auth/loginModal.component";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { loadUser } from "../actions/auth.actions";
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  NavbarText
+} from "reactstrap";
+
 import store from "../store";
 
-class Navbar extends Component {
+class NavbarComponent extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired
   };
@@ -53,30 +68,30 @@ class Navbar extends Component {
     );
 
     return (
-      <nav className="navbar navbar-dark navbar-expand-lg">
-        <Link to="/" className="navbar-brand">
+      <Navbar className="navbar navbar-dark navbar-expand-lg">
+        <NavLink href="/" className="navbar-brand">
           MicroBlog
-        </Link>
+        </NavLink>
         <div className="collapse navbar-collapse">
-          <ul className="navbar-nav mr-auto">
-            <li className="navbar-item">
-              <Link to="/posts" className="nav-link">
+          <Nav className="navbar-nav mr-auto">
+            <NavItem>
+              <NavLink href="/posts" className="nav-link">
                 All Posts
-              </Link>
-            </li>
+              </NavLink>
+            </NavItem>
             {isAuth ? (
-              <li className="navbar-item">
-                <Link to="/followed" className="nav-link">
+              <NavItem>
+                <NavLink href="/followed" className="nav-link">
                   Followed Posts
-                </Link>
-              </li>
+                </NavLink>
+              </NavItem>
             ) : null}
-          </ul>
+          </Nav>
         </div>
         <ul className="navbar-nav mr-auto ">
           {isAuth ? authLinks : guestLinks}
         </ul>
-      </nav>
+      </Navbar>
     );
   }
 }
@@ -86,4 +101,4 @@ const mapStateToProps = state => ({
 });
 //connect to store -> data to mapstatetoprops
 //actions we want to use as second paranthesis
-export default connect(mapStateToProps, null)(Navbar);
+export default connect(mapStateToProps, null)(NavbarComponent);
