@@ -70,39 +70,6 @@ class NavbarComponent extends Component {
         </li>
       </Fragment>
     );
-    /*
-    return (
-      <Navbar
-        color="dark"
-        dark
-        expand="md"
-        className="navbar navbar-dark navbar-expand-lg"
-      >
-        <NavLink href="/" className="navbar-brand">
-          MicroBlog
-        </NavLink>
-        <div className="collapse navbar-collapse">
-          <Nav className="navbar-nav mr-auto">
-            <NavItem>
-              <NavLink href="/posts" className="nav-link">
-                All Posts
-              </NavLink>
-            </NavItem>
-            {isAuth ? (
-              <NavItem>
-                <NavLink href="/followed" className="nav-link">
-                  Followed Posts
-                </NavLink>
-              </NavItem>
-            ) : null}
-          </Nav>
-        </div>
-        <ul className="navbar-nav mr-auto ">
-          {isAuth ? authLinks : guestLinks}
-        </ul>
-      </Navbar>
-    );*/
-
     const toggle = () =>
       this.setState({
         isOpen: !this.state.isOpen
