@@ -7,6 +7,7 @@ import LoginModal from "./auth/loginModal.component";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { loadUser } from "../actions/auth.actions";
+
 import {
   Collapse,
   Navbar,
@@ -27,6 +28,9 @@ import store from "../store";
 class NavbarComponent extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired
+  };
+  state = {
+    isOpen: false
   };
   componentDidMount() {
     store.dispatch(loadUser());
@@ -66,9 +70,14 @@ class NavbarComponent extends Component {
         </li>
       </Fragment>
     );
-
+    /*
     return (
-      <Navbar className="navbar navbar-dark navbar-expand-lg">
+      <Navbar
+        color="dark"
+        dark
+        expand="md"
+        className="navbar navbar-dark navbar-expand-lg"
+      >
         <NavLink href="/" className="navbar-brand">
           MicroBlog
         </NavLink>
@@ -92,6 +101,43 @@ class NavbarComponent extends Component {
           {isAuth ? authLinks : guestLinks}
         </ul>
       </Navbar>
+    );*/
+
+    const toggle = () =>
+      this.setState({
+        isOpen: !this.state.isOpen
+      });
+    return (
+      <div>
+        <Navbar
+          color="dark"
+          dark
+          expand="md"
+          className="navbar navbar-dark navbar-expand-lg"
+        >
+          <NavLink href="/" className="navbar-brand">
+            MicroBlog
+          </NavLink>
+          <NavbarToggler onClick={toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="navbar-nav mr-auto">
+              <NavItem>
+                <NavLink href="/posts" className="nav-link">
+                  All Posts
+                </NavLink>
+              </NavItem>
+              {isAuth ? (
+                <NavItem>
+                  <NavLink href="/followed" className="nav-link">
+                    Followed Posts
+                  </NavLink>
+                </NavItem>
+              ) : null}
+            </Nav>
+            <ul className="navbar-nav">{isAuth ? authLinks : guestLinks}</ul>
+          </Collapse>
+        </Navbar>
+      </div>
     );
   }
 }
