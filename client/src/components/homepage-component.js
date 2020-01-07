@@ -11,7 +11,7 @@ export default class Homepage extends Component {
       <div className="app">
         <Jumbotron>
           <div className="container">
-            <h1 className="display-3">Welcome to MicroBlog!</h1>
+            <h3> Welcome to MicroBlog!</h3>
             <br />
             <p>
               This is a MERN stack application made for course work. With

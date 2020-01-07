@@ -37,9 +37,7 @@ class PostList extends Component {
       <div className="container-fluid">
         <Jumbotron>
           <div className="container">
-            <h1 className="display-3">
-              {user ? `Welcome back ${user.name}!` : ""}
-            </h1>
+            <h3>{user ? `Welcome back ${user.name}!` : ""}</h3>
             <br />
             <p>
               {user

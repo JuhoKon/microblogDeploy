@@ -47,13 +47,10 @@ class NavbarComponent extends Component {
 
     const authLinks = (
       <Fragment>
-        <li className="navbar-text">
-          {user ? `Signed in as: ${user.name}!` : ""}
-        </li>
         <li className="navbar-item">
-          <Link to="/user" className="nav-link">
+          <NavLink href="/user" className="nav-link">
             Profile
-          </Link>
+          </NavLink>
         </li>
         <li>
           <LogOut />
@@ -86,6 +83,7 @@ class NavbarComponent extends Component {
             MicroBlog
           </NavLink>
           <NavbarToggler onClick={toggle} />
+
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="navbar-nav mr-auto">
               <NavItem>

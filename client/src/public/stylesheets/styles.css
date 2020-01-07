@@ -7,7 +7,7 @@
   color: #ffffff;
 }
 .modal-header {
-  background-color: #8e29db;
+  background-color: #343a40;
 }
 .button-close {
   color: #ffffff;
@@ -29,9 +29,9 @@
   font-size: x-large;
 }
 .createPost {
-  border: 2px solid#d5b0fc;
+  border: 2px solid #e9ecef;
   border-radius: 5px;
-  background-color: #e6d5f8;
+  background-color: #fff;
   margin-left: auto;
   margin-right: auto;
   max-width: 50rem;
@@ -40,9 +40,9 @@
   min-height: 100vh;
 }
 .card {
-  border: 2px solid #d5b0fc;
+  border: 2px solid #e9ecef;
   border-radius: 5px;
-  background-color: #e6d5f8;
+  background-color: #fff;
   margin-left: auto;
   margin-right: auto;
   max-width: 50rem;
@@ -52,5 +52,5 @@
   text-align: center;
 }
 .jumbotron {
-  background-color: #d9bafa;
+  padding: 1rem;
 }

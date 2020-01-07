@@ -1,5 +1,5 @@
 .btn-edit {
-  background-color: #63199b;
+  background-color: #e9ecef;
   color: white;
 
   float: right;
@@ -10,17 +10,17 @@
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  border-color: #63199b;
+  border-color: #e9ecef;
 }
 .btn {
-  background-color: #63199b;
+  background-color: #e9ecef;
   color: white;
   padding: 14px 24px;
   border: 0 none;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  border-color: #63199b;
+  border-color: #e9ecef;
 }
 .btn:focus,
 .btn:active:focus,
@@ -31,11 +31,11 @@
   background-color: black;
 }
 .btn-primary {
-  background-color: #63199b;
+  background-color: #343a40;
   border-color: #63199b;
 }
 .btn-secondary {
-  background-color: #63199b;
+  background-color: #343a40;
 }
 .btn-primary:hover,
 .btn-primary:focus,
