@@ -26,6 +26,23 @@ import {
 import store from "../store";
 
 class NavbarComponent extends Component {
+  constructor(props) {
+    super(props);
+
+    // https://www.w3schools.com/howto/howto_js_navbar_hide_scroll.asp
+    let prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+      const maxScroll = document.body.clientHeight - window.innerHeight;
+      let currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById("navbar").style.top = "0";
+      } else {
+        document.getElementById("navbar").style.top = "-50px";
+      }
+      prevScrollpos = currentScrollPos;
+    };
+  }
+
   static propTypes = {
     auth: PropTypes.object.isRequired
   };
@@ -74,6 +91,7 @@ class NavbarComponent extends Component {
     return (
       <div>
         <Navbar
+          id="navbar"
           color="dark"
           dark
           expand="md"
