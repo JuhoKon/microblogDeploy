@@ -22,7 +22,6 @@ class CreatePost extends Component {
     clearErrors: PropTypes.func.isRequired,
     clearMessages: PropTypes.func.isRequired
   };
-
   componentDidUpdate(prevProps) {
     const { error } = this.props;
     if (error !== prevProps.error) {
