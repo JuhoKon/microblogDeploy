@@ -77,7 +77,7 @@ exports.create = function(req, res, next) {
                 //make token for the user
                 { id: user.id },
                 jwtSecret, //get secret from config file
-                { expiresIn: 3600000 }, //set to expire in hour
+                { expiresIn: "1h" }, //set to expire in hour
                 (err, token) => {
                   if (err) throw err;
                   res.json({
