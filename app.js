@@ -15,7 +15,6 @@ app.use(cors());
 //making uploads folder public
 app.use("/uploads", express.static("uploads"));
 app.use("/apidoc", express.static("apidoc"));
-app.use(express.static("client/build"));
 // Reading env variables (config example from https://github.com/sclorg/nodejs-ex/blob/master/server.js)
 var mongoURL = process.env.MONGO_URL;
 
@@ -43,10 +42,14 @@ app.get("/api/doc", function(req, res) {
   res.sendFile(path.join(__dirname + "/apidoc/index.html"));
 });
 
+// Express only serves static assets in production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  console.log("Hey");
 });
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
