@@ -59,7 +59,7 @@ class OtherUserInfo extends Component {
     );
     const authContent = (
       <Jumbotron>
-        Welcome {this.props.match.params.id}'s page!
+        Welcome to {this.props.match.params.id}'s page!
         <br />
       </Jumbotron>
     );

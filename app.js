@@ -38,8 +38,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api/posts", postsRouter); //forward request to router
 app.use("/api/users", usersRouter);
 app.use("/api/auth", authRouter);
-app.get("/api/doc", function(req, res) {
-  res.sendFile(path.join(__dirname + "/apidoc/index.html"));
+app.get("/doc", function(req, res) {
+  console.log(__dirname);
+  res.sendFile(path.resolve(__dirname, "apidoc", "index.html"));
 });
 
 // Express only serves static assets in production
