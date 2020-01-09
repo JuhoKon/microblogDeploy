@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useReducer } from "react";
+import React, { Component } from "react";
 import { Jumbotron } from "reactstrap";
 import { connect } from "react-redux";
 import { getFollowed } from "../actions/post.actions";

@@ -40,7 +40,7 @@ class OtherUserInfo extends Component {
     const { item } = this.props.items;
     const followId = item[0]._id;
     const ownId = user._id;
-    console.log(followId, ownId);
+
     this.props.follow(ownId, followId);
   }
   unfollow() {
@@ -76,6 +76,7 @@ class OtherUserInfo extends Component {
             Follow
           </Button>
         )}
+
         <br />
         <br />
         <br />
@@ -100,7 +101,7 @@ class OtherUserInfo extends Component {
     return (
       <div className="container">
         <span>{isAuth ? authContent : guestContent} </span>
-        <span>{isAuth ? authPosts : ""} </span>
+        <span>{isAuth && items.length > 0 ? authPosts : null} </span>
       </div>
     );
   }

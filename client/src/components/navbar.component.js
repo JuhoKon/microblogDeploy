@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
 import "../public/stylesheets/navbar.css";
 import RegisterModal from "./auth/registerModal.component";
 import LogOut from "./auth/logout.component";
@@ -12,15 +11,9 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText
+  NavLink
 } from "reactstrap";
 
 import store from "../store";
@@ -32,7 +25,6 @@ class NavbarComponent extends Component {
     // https://www.w3schools.com/howto/howto_js_navbar_hide_scroll.asp
     let prevScrollpos = window.pageYOffset;
     window.onscroll = function() {
-      const maxScroll = document.body.clientHeight - window.innerHeight;
       let currentScrollPos = window.pageYOffset;
       if (prevScrollpos > currentScrollPos) {
         document.getElementById("navbar").style.top = "0";
@@ -60,7 +52,7 @@ class NavbarComponent extends Component {
   }
 
   render() {
-    const { isAuth, user } = this.props.auth; //get everything from authreducer, what we defined there, user.. auth etc.
+    const { isAuth } = this.props.auth; //get everything from authreducer, what we defined there, user.. auth etc.
 
     const authLinks = (
       <Fragment>
