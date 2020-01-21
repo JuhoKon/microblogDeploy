@@ -6,7 +6,7 @@ require("dotenv").config();
 
 const REDIS_PORT = process.env.REDIS_PORT || 6379;
 const REDIS_HOST = process.env.REDIS_HOST || "127.0.0.1";
-const REDIS_URL = process.env.REDIS_URL || "127.0.0.1:6379";
+const REDIS_URL = process.env.REDIS_URL || "https://localhost:6379";
 const client = redis.createClient(REDIS_URL);
 client.on("error", err => {
   console.log("Error " + err);
@@ -137,11 +137,21 @@ exports.deleteByID = function(req, res, next) {
     if (typeof results !== "undefined" && results !== null) {
       if (typeof results.blogImage !== "undefined") {
         //if there's an image, try to delete it from the directory
-        try {
+        /*try {
           fs.unlinkSync(results.blogImage);
         } catch (err) {
           console.error(err);
-        }
+        }*/
+        const s3 = setupAws();
+        const key = results.blogImage.split("amazonaws.com/")[1];
+        var params = {
+          Bucket: process.env.BUCKET_NAME,
+          Key: key
+        };
+        s3.deleteObject(params, function(err) {
+          //delete object from Amazon s3
+          if (err) console.log(err, err.stack);
+        });
       }
       Post.findByIdAndDelete(id) //delete actual post from the database
         .then(() => {
