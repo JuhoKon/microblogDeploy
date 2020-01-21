@@ -1,5 +1,6 @@
 var Post = require("../models/post.model");
 //var User = require("../models/user.model");
+var { setupAws, s3Upload } = require("../middleware/aws");
 var redis = require("redis"); //Cache
 require("dotenv").config();
 
@@ -50,25 +51,50 @@ exports.create = function(req, res, next) {
       text: req.body.text,
       owner: req.body.owner
     });
+    post
+      .save() //attempt to save to the database
+      .then(() => {
+        client.del("Posts"); //Delete main cache
+        client.del(req.body.username); //delete username's cache
+        client.del(req.body.owner); //delete userID's cache
+        res.json(post);
+      })
+      .catch(err => res.status(400).json("Error: " + err));
   } else {
     //image file is submitted
-    var post = new Post({
-      title: req.body.title,
-      username: req.body.username,
-      text: req.body.text,
-      owner: req.body.owner,
-      blogImage: req.file.path
+    const s3 = setupAws();
+    var params = {
+      Bucket: process.env.BUCKET_NAME,
+      Body: fs.createReadStream(req.file.path),
+      Key: `blogImage/${Date.now() + req.file.originalname}`
+    };
+    console.log(params.Bucket);
+    s3.upload(params, (err, data) => {
+      if (err) {
+        console.log("Error occured while trying to upload to S3 bucket", err);
+      }
+      if (data) {
+        fs.unlinkSync(req.file.path); //delete static files
+        const locationUrl = data.Location;
+        var post = new Post({
+          title: req.body.title,
+          username: req.body.username,
+          text: req.body.text,
+          owner: req.body.owner,
+          blogImage: locationUrl
+        });
+        post
+          .save() //attempt to save to the database
+          .then(() => {
+            client.del("Posts"); //Delete main cache
+            client.del(req.body.username); //delete username's cache
+            client.del(req.body.owner); //delete userID's cache
+            res.json(post);
+          })
+          .catch(err => res.status(400).json("Error: " + err));
+      }
     });
   }
-  post
-    .save() //attempt to save to the database
-    .then(() => {
-      client.del("Posts"); //Delete main cache
-      client.del(req.body.username); //delete username's cache
-      client.del(req.body.owner); //delete userID's cache
-      res.json(post);
-    })
-    .catch(err => res.status(400).json("Error: " + err));
 };
 //handle search by ID GET request
 exports.findByID = function(req, res, next) {
